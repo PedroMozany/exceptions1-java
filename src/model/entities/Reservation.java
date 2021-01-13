@@ -42,23 +42,26 @@ public class Reservation {
 
 	}
 
-	public void updateDates(Date ckeckIn, Date ckeckOut) {
+	public String updateDates(Date ckeckIn, Date ckeckOut) {
+		Date now = new Date();
+
+		if (ckeckIn.before(now) || ckeckOut.before(now)) {
+			return "Reservation dates for update must be future dates";
+
+		}
+		if (!ckeckOut.after(ckeckIn)) {
+			return "Check-out date must be after check-in date";
+		}
 		this.ckeckIn = ckeckIn;
 		this.ckeckOut = ckeckOut;
+		return null;
+
 	}
 
 	@Override
-	public String toString () {
-		return " Room " 
-				+ roomNumber
-				+ ", check-in: "
-				+ sdf.format(ckeckIn)
-				+", check-out: "
-				+ sdf.format(ckeckOut)
-				+ ", "
-				+ duration()
-				+" nights";
-		
-				
+	public String toString() {
+		return " Room " + roomNumber + ", check-in: " + sdf.format(ckeckIn) + ", check-out: " + sdf.format(ckeckOut)
+				+ ", " + duration() + " nights";
+
 	}
 }

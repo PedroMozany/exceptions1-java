@@ -33,12 +33,19 @@ public class Program {
 			ckeckIn = sdf.parse(sc.next());
 			System.out.print("Check-out date (dd/MM/yyyy): ");
 			ckeckOut = sdf.parse(sc.next());
-			reservation.updateDates(ckeckIn, ckeckOut);
-			System.out.println("Reservation: " + reservation);
+
+			String error = reservation.updateDates(ckeckIn, ckeckOut);
+			if (error != null) {
+				System.out.println("Erro in reservation: " + error);
+			}
+
+			else {
+				System.out.println("Reservation: " + reservation);
+
+			}
+
+			sc.close();
+
 		}
-
-		sc.close();
-
 	}
-
 }
